@@ -1,0 +1,9 @@
+[config]
+
+name="GodotGooglePlayInAppReview"
+binary_type="local"
+binary="GodotGooglePlayInAppReview.1.0.0.release.aar"
+
+[dependencies]
+
+remote=["com.google.android.play:core:1.8.0"]

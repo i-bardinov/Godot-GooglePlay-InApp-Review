@@ -1,0 +1,11 @@
+*.pyc
+.DS_Store
+*.import
+.import
+.mono
+*.o
+demo/android
+tools/releases
+.idea
+.settings
+.project

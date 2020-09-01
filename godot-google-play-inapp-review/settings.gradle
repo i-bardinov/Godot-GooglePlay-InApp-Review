@@ -1,0 +1,3 @@
+rootProject.name='Godot Google Play In-App Review'
+include ':godot-lib.release'
+include ':godot-inappreview'
