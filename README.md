@@ -1,6 +1,6 @@
 # Godot Google Play In-App Review Plugin
 
-This is a Android plugin for [Godot Engine](https://github.com/godotengine/godot) 3.2.2 or higher.
+This is a Android plugin for [Godot Engine](https://github.com/godotengine/godot) 3.4 or higher.
 
 This plugin supports:
 - Request review

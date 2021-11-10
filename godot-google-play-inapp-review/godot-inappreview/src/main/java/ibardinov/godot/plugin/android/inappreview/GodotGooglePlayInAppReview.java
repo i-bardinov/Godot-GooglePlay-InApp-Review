@@ -19,13 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.collection.ArraySet;
 
 public class GodotGooglePlayInAppReview extends GodotPlugin {
-    private Activity activity = null; // The main activity of the game
     ReviewManager manager = null;
     ReviewInfo reviewInfo = null;
 
     public GodotGooglePlayInAppReview(Godot godot) {
         super(godot);
-        activity = godot;
     }
 
     @NonNull
@@ -60,7 +58,7 @@ public class GodotGooglePlayInAppReview extends GodotPlugin {
      */
     public void requestReviewInfo() {
         if (manager == null) {
-            manager = ReviewManagerFactory.create(activity);
+            manager = ReviewManagerFactory.create(getActivity());
         }
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
@@ -79,7 +77,7 @@ public class GodotGooglePlayInAppReview extends GodotPlugin {
      *
      */
     public void launchReviewFlow() {
-        Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+        Task<Void> flow = manager.launchReviewFlow(getActivity(), reviewInfo);
         flow.addOnCompleteListener(task -> {
             emitSignal("on_launch_review_flow_success");
         });

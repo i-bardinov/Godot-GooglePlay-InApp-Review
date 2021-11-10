@@ -2,16 +2,15 @@ plugins {
     id 'com.android.library'
 }
 
-ext.pluginVersionCode = 1
-ext.pluginVersionName = "1.0.0"
+ext.pluginVersionCode = 2
+ext.pluginVersionName = "1.0.1"
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode pluginVersionCode
         versionName pluginVersionName
 
@@ -30,16 +29,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.google.android.play:core:1.8.0'
+    implementation 'com.google.android.play:core:1.10.2'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
     compileOnly project(':godot-lib.release')
