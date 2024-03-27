@@ -2,8 +2,8 @@
 
 name="GodotGooglePlayInAppReview"
 binary_type="local"
-binary="GodotGooglePlayInAppReview.1.0.1.release.aar"
+binary="GodotGooglePlayInAppReview.1.0.2.release.aar"
 
 [dependencies]
 
-remote=["com.google.android.play:core:1.10.2"]
+remote=["com.google.android.play:review:2.0.1"]
