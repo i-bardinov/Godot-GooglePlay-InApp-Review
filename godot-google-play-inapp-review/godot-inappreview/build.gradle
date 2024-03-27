@@ -3,14 +3,14 @@ plugins {
 }
 
 ext.pluginVersionCode = 2
-ext.pluginVersionName = "1.0.1"
+ext.pluginVersionName = "1.0.2"
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode pluginVersionCode
         versionName pluginVersionName
 
@@ -34,7 +34,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.google.android.play:core:1.10.2'
+    implementation 'com.google.android.play:review:2.0.1'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
     compileOnly project(':godot-lib.release')
