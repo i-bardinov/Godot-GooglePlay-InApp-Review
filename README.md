@@ -38,6 +38,22 @@ requestReviewInfo()
 launchReviewFlow()
 
 ```
+### Usage
+```python
+
+#Call method requestReviewInfo() after connecting the signal
+if in_app_review:
+	in_app_review.requestReviewInfo()
+
+#The launchReviewFlow() method can only be call once requestReviewInfo are received
+func _on_request_review_success():
+	in_app_review.launchReviewFlow()
+
+#Print error if request info fails
+func _on_request_review_failed():
+	print_debug("Error request review failed")
+
+```
 ### Signals
 ```python
 # Review Info was received
