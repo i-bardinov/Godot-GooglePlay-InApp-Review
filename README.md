@@ -1,6 +1,7 @@
 # Godot Google Play In-App Review Plugin
 
-This is a Android plugin for [Godot Engine](https://github.com/godotengine/godot) 3.4 or higher.
+This is a Android plugin for [Godot Engine](https://github.com/godotengine/godot) 4.6 or higher.
+It integrates the Google Play In-App Review API, allowing you to prompt users to submit Play Store ratings and reviews without leaving your game.
 
 This plugin supports:
 - Request review
@@ -8,10 +9,9 @@ This plugin supports:
 
 ## Setup
 
-- Configure, install  and enable the "Android Custom Template" for your project, just follow the [official documentation](https://docs.godotengine.org/en/latest/getting_started/workflow/export/android_custom_build.html);
-- go to the ```release tab```, choose a version and download the respective package;
-- extract the package and put```GodotGooglePlayInAppReview.gdap``` and ```GodotGooglePlayInAppReview.x.y.z.release.aar``` inside the ```res://android/plugins``` directory on your Godot project.
-- on the Project -> Export... -> Android -> Options -> 
+- Go to the `Releases` tab, choose a version, and download the plugin package.
+- Extract the package and place the `GodotGooglePlayInAppReview` folder inside the `res://addons/` directory of your Godot project.
+- on the `Project -> Project Settings -> Plugins` -> 
     - Custom Template: check the _Use Custom Build_
     - Plugins: check the _Godot # Godot Google Play In App Review_ (this plugin)
 
@@ -72,7 +72,7 @@ If you want to compile the plugin by yourself, it's very easy:
 1. clone this repository;
 2. checkout the desired version;
 3. open ```godot-google-play-inapp-review``` directory in ```Android Studio```
-4. don't forget to put ```godot-lib.release.aar``` to ```godot-lib.release``` directory
+4. run the Gradle assembleRelease task.
 
 If everything goes fine, you'll find the ```.aar``` files at ```godot-google-play-inapp-review/godot-inappreview/build/outputs/aar/```.
 

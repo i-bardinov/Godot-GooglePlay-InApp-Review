@@ -1,26 +1,18 @@
 plugins {
-    id 'com.android.library'
+    alias(libs.plugins.android.library)
 }
 
-ext.pluginVersionCode = 2
-ext.pluginVersionName = "1.0.2"
-
 android {
-    compileSdkVersion 33
-
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
-        versionCode pluginVersionCode
-        versionName pluginVersionName
-
-        consumerProguardFiles 'consumer-rules.pro'
+    namespace 'ibardinov.godot.plugin.android.inappreview'
+    compileSdk {
+        version = release(36)
     }
 
-    libraryVariants.all { variant ->
-        variant.outputs.all { output ->
-            output.outputFileName = "GodotGooglePlayInAppReview.$pluginVersionName.${variant.name}.aar"
-        }
+    defaultConfig {
+        minSdk 24
+        targetSdk 36
+        versionCode 3
+        versionName "1.1.0"
     }
 
     buildTypes {
@@ -29,13 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.google.android.play:review:2.0.1'
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-
-    compileOnly project(':godot-lib.release')
+    implementation libs.review
+    implementation(libs.godot)
 }

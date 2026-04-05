@@ -1,0 +1,11 @@
+[versions]
+agp = "9.0.1"
+godot = "4.6.2.stable"
+review = "2.0.2"
+
+[libraries]
+godot = { module = "org.godotengine:godot", version.ref = "godot" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "agp" }

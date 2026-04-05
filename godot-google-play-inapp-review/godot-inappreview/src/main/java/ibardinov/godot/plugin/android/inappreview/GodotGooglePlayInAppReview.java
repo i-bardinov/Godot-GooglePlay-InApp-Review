@@ -1,26 +1,28 @@
 package ibardinov.godot.plugin.android.inappreview;
 
 import android.app.Activity;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.collection.ArraySet;
 
 import org.godotengine.godot.Godot;
 import org.godotengine.godot.plugin.GodotPlugin;
 import org.godotengine.godot.plugin.SignalInfo;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import org.godotengine.godot.plugin.UsedByGodot;
 
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.gms.tasks.Task;
 
-import androidx.annotation.NonNull;
-import androidx.collection.ArraySet;
+import java.util.Set;
 
 public class GodotGooglePlayInAppReview extends GodotPlugin {
-    ReviewManager manager = null;
-    ReviewInfo reviewInfo = null;
+
+    private ReviewManager manager = null;
+    private ReviewInfo reviewInfo = null;
+    private static final String TAG = "GodotGooglePlayInAppReview";
 
     public GodotGooglePlayInAppReview(Godot godot) {
         super(godot);
@@ -30,14 +32,6 @@ public class GodotGooglePlayInAppReview extends GodotPlugin {
     @Override
     public String getPluginName() {
         return "GodotGooglePlayInAppReview";
-    }
-
-    @NonNull
-    @Override
-    public List<String> getPluginMethods() {
-        return Arrays.asList(
-                "requestReviewInfo", "launchReviewFlow"
-        );
     }
 
     @NonNull
@@ -56,17 +50,22 @@ public class GodotGooglePlayInAppReview extends GodotPlugin {
      * Request Review Info
      *
      */
+    @UsedByGodot
     public void requestReviewInfo() {
+        Activity currentActivity = getActivity();
+        if (currentActivity == null) return;
+
         if (manager == null) {
-            manager = ReviewManagerFactory.create(getActivity());
+            manager = ReviewManagerFactory.create(currentActivity);
         }
+
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // We can get the ReviewInfo object
                 reviewInfo = task.getResult();
                 emitSignal("on_request_review_success");
             } else {
+                Log.e(TAG, "Request failed", task.getException());
                 emitSignal("on_request_review_failed");
             }
         });
@@ -76,10 +75,19 @@ public class GodotGooglePlayInAppReview extends GodotPlugin {
      * Launch review with GUI
      *
      */
+    @UsedByGodot
     public void launchReviewFlow() {
-        Task<Void> flow = manager.launchReviewFlow(getActivity(), reviewInfo);
+        Activity currentActivity = getActivity();
+
+        if (currentActivity == null || manager == null || reviewInfo == null) {
+            Log.e(TAG, "Cannot launch review flow. Info is missing.");
+            return;
+        }
+
+        Task<Void> flow = manager.launchReviewFlow(currentActivity, reviewInfo);
         flow.addOnCompleteListener(task -> {
             emitSignal("on_launch_review_flow_success");
+            reviewInfo = null;
         });
     }
 }
